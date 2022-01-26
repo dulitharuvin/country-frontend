@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ContinentEditItemComponent } from './continent/continent-edit-item/continent-edit-item.component';
-import { ContinentListComponent } from './continent/continent-list/continent-list.component';
-import { ContinentComponent } from './continent/continent.component';
-import { CountryDetailViewComponent } from './country/country-detail-view/country-detail-view.component';
-import { CountryEditItemComponent } from './country/country-edit-item/country-edit-item.component';
-import { CountryListComponent } from './country/country-list/country-list.component';
-import { CountryComponent } from './country/country.component';
+import { ContinentEditItemComponent } from './components/continent/continent-edit-item/continent-edit-item.component';
+import { ContinentListComponent } from './components/continent/continent-list/continent-list.component';
+import { ContinentComponent } from './components/continent/continent.component';
+import { CountryDetailViewComponent } from './components/country/country-detail-view/country-detail-view.component';
+import { CountryEditItemComponent } from './components/country/country-edit-item/country-edit-item.component';
+import { CountryListComponent } from './components/country/country-list/country-list.component';
+import { CountryComponent } from './components/country/country.component';
 
 const routes: Routes = [
   {
