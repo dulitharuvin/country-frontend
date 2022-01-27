@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
-import { CountryItem } from '../model/country.model';
+import { CountryItem } from '../model/country-item.model';
 import { CountryHttpService } from './country-http.service';
 
 @Injectable({
@@ -16,8 +16,11 @@ export class CountryService {
   ): Observable<CountryItem[]> {
     var url = '/?continentId=$continentId$&query=$query$';
     var urlWithValues = url
-    .replace("$continentId$", continentId != undefined ? continentId.toString() : "")
-    .replace("$query$", query != undefined ? query : "");
+      .replace(
+        '$continentId$',
+        continentId != undefined ? continentId.toString() : ''
+      )
+      .replace('$query$', query != undefined ? query : '');
     return this.countryHttpService.httpGetRequestObservable(urlWithValues).pipe(
       map((data: any) => {
         return data.map((o: any) => {
