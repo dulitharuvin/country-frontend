@@ -10,9 +10,10 @@
         </thead>
         <tbody>
             <tr *ngFor="let country of countryItemList" (click)="navigateToCountryDetail(country)">
-                <th scope="col">{{country.name}}</th>
-                <th scope="col">{{country.code}}</th>
-                <th scope="col"></th>
+                <td scope="col">{{country.name}}</td>
+                <td scope="col">{{country.code}}</td>
+                <td scope="col">
+                </td>
                 <th scope="col">{{country.continent?.name}}</th>
             </tr>
         </tbody>
