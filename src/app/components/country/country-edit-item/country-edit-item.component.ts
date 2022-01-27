@@ -51,6 +51,10 @@ export class CountryEditItemComponent implements OnInit {
     });
   }
 
+  cancelSave(){
+    this.router.navigate(['../list'], { relativeTo: this.activatedRoute });
+  }
+
   private getContinentList(): void {
     this.continentService.getContinentList().subscribe({
       next: (data: ContinentItem[]) => {

@@ -17,6 +17,11 @@
                 </option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary" [disabled]="!countryForm.valid">Save</button>
+        <div class="row">
+            <div class="col-12">
+                <button class="btn btn-secondary ml-3 float-right" (click)="cancelSave()">Cancel</button>
+                <button type="submit" class="btn btn-primary float-right" [disabled]="!countryForm.valid">Save</button>
+            </div>
+        </div>
     </form>
 </div>
