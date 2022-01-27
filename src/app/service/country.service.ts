@@ -29,4 +29,15 @@ export class CountryService {
       })
     );
   }
+
+  public saveCountry(
+    country: CountryItem,
+    continentId: number
+  ): Observable<CountryItem> {
+    var urlWithValues = '/' + continentId;
+    return this.countryHttpService.httpPostRequestObservable(
+      urlWithValues,
+      country
+    );
+  }
 }

@@ -30,8 +30,11 @@ export class CountryComponent implements OnInit {
     this.getContinentList();
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
-        if (val.url.indexOf('/country/list') != -1)
+        if (val.url.indexOf('/country/list') == -1){
+          this.showCountryHeader = false;
+        }else{
           this.showCountryHeader = true;
+        }
       }
     });
   }

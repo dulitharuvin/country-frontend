@@ -1,1 +1,22 @@
-<p>country-edit-item works!</p>
+<div class="p-4 my-2 bg-light">
+    <h5>Add a new country</h5>
+    <form [formGroup]="countryForm" (ngSubmit)="saveCountry()">
+        <div class="form-group">
+            <label for="name">Country Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter name" formControlName="name">
+        </div>
+        <div class="form-group">
+            <label for="code">Country Code</label>
+            <input type="text" class="form-control" id="code" placeholder="Code" formControlName="code">
+        </div>
+        <div class="form-group">
+            <label for="code">Select Continent</label>
+            <select class="form-control" id="continentSelect" formControlName="continentId">
+                <option [ngValue]="null">Select a continent</option>
+                <option *ngFor="let continent of continentList" [ngValue]="continent.continentId">{{ continent.name }}
+                </option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!countryForm.valid">Save</button>
+    </form>
+</div>
