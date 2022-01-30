@@ -10,12 +10,14 @@
             <input type="text" class="form-control" id="code" placeholder="Code" formControlName="code">
         </div>
         <div class="form-group">
-            <label for="code">Select Continent</label>
-            <select class="form-control" id="continentSelect" formControlName="continentId">
+            <label for="continent">Select Continent</label>
+            <!-- <select class="form-control" id="continentSelect" formControlName="continentId">
                 <option [ngValue]="null">Select a continent</option>
                 <option *ngFor="let continent of continentList" [ngValue]="continent.continentId">{{ continent.name }}
                 </option>
-            </select>
+            </select> -->
+            <input id="continent" type="text" class="form-control" formControlName="continent"
+                [ngbTypeahead]="search" [inputFormatter]="formatter" [resultFormatter]="formatter" [editable]='false' />
         </div>
         <div class="row">
             <div class="col-12">
