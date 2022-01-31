@@ -20,4 +20,14 @@ export class ContinentService {
       })
     );
   }
+
+  public saveContinent(
+    continent: ContinentItem
+  ): Observable<ContinentItem> {
+    var url = '';
+    return this.continentHttpService.httpPostRequestObservable(
+      url,
+      continent
+    );
+  }
 }

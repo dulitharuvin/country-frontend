@@ -13,6 +13,7 @@ import { CountryDetailViewComponent } from './components/country/country-detail-
 import { ContinentEditItemComponent } from './components/continent/continent-edit-item/continent-edit-item.component';
 import { ContinentListComponent } from './components/continent/continent-list/continent-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CountryDetailViewComponent,
     ContinentEditItemComponent,
     ContinentListComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,

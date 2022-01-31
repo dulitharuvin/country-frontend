@@ -1,1 +1,21 @@
-<p>continent-edit-item works!</p>
+<form [formGroup]="continentForm" (ngSubmit)="saveContinent()">
+  <div class="modal-header">
+    <h5>Add a new Continent</h5>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="p-4 my-2 bg-light">
+      <div class="form-group">
+        <label for="name">Countinent name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter name" formControlName="name">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="close()">Cancel</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!continentForm.valid">Save
+      Continent</button>
+  </div>
+</form>

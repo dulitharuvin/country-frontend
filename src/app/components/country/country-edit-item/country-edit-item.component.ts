@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -15,6 +16,9 @@ import { ContinentItem } from 'src/app/model/continent-item.model';
 import { CountryItem } from 'src/app/model/country-item.model';
 import { ContinentService } from 'src/app/service/continent.service';
 import { CountryService } from 'src/app/service/country.service';
+import { ConfirmationDialogService } from '../../confirmation-dialog/confirmation-dialog.service';
+
+import { ContinentEditItemComponent } from '../../continent/continent-edit-item/continent-edit-item.component';
 
 @Component({
   selector: 'app-country-edit-item',
@@ -41,6 +45,8 @@ export class CountryEditItemComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
+    private modalService: NgbModal,
+    private confirmationDialogService: ConfirmationDialogService,
     private continentService: ContinentService,
     private countryService: CountryService
   ) {
@@ -49,17 +55,22 @@ export class CountryEditItemComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  saveCountry(): void {
-    console.warn(this.countryForm.value);
+  async saveCountry() {
     const country = new CountryItem();
     country.name = this.countryForm.get('name')?.value;
     country.code = this.countryForm.get('code')?.value;
-    const continentId: number = this.countryForm.get('continent')?.value['continentId'];
-    this.countryService.saveCountry(country, continentId).subscribe({
-      next: (data: CountryItem) => {
-        this.router.navigate(['../list'], { relativeTo: this.activatedRoute });
-      },
-    });
+    const continentId: number =
+      this.countryForm.get('continent')?.value?.continentId;
+    if (continentId) {
+      this.saveCountryCall(continentId, country);
+    } else {
+      this.openContinetentNotSelectedDialog().then((newContinent) =>{
+        if(newContinent){
+          this.continentList.push(newContinent);
+          this.countryForm.patchValue({continent : newContinent});
+        }
+      });
+    }
   }
 
   cancelSave() {
@@ -89,6 +100,39 @@ export class CountryEditItemComponent implements OnInit {
       },
       error: (error) => {
         console.log(error);
+      },
+    });
+  }
+
+  private async openContinetentNotSelectedDialog() {
+    let newContinentPromise = new Promise<ContinentItem>((resolve, reject) => {
+      this.confirmationDialogService
+        .confirm('Please select a valid continent', 'Click Ok to create a new continent for the country or cancel to select an existing one')
+        .then((confirmed) => {
+          if (confirmed) {
+             resolve(this.openCreateContinentDialog());
+          } else {
+            reject(false)
+          }
+        })
+        .catch(() => {
+          reject(false);
+        });
+    });
+    return await newContinentPromise;
+  }
+
+  private async openCreateContinentDialog(): Promise<ContinentItem> {
+    const modalRef = this.modalService.open(ContinentEditItemComponent).result;
+    return await modalRef;
+  }
+
+  private saveCountryCall(continentId: number, country: CountryItem) {
+    this.countryService.saveCountry(country, continentId).subscribe({
+      next: (data: CountryItem) => {
+        this.router.navigate(['../list'], {
+          relativeTo: this.activatedRoute,
+        });
       },
     });
   }
