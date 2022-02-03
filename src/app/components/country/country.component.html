@@ -1,18 +1,24 @@
 <div class="p-4 my-2 bg-light" *ngIf="showCountryHeader">
     <div class="row mb-2">
-        <div>
-            <div class="col-auto">
-                <div class="form-group">
-                    <label for="continentSelect">Filter by continent</label>
-                    <select class="form-control" id="continentSelect" [(ngModel)]="selectedContinentId" (change)="sumbitCountrySearch()">
-                        <option [ngValue]="null">Select a continent</option>
-                        <option *ngFor="let continent of continentList" [ngValue]="continent.continentId">{{ continent.name }}</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-auto">
-
-            </div>
+        <div class="col-auto">
+            <h5>Search Country</h5>
+        </div>
+    </div>
+    <div class="form-row align-items-center mb-5">
+        <div class="col-auto">
+            <input type="text" class="form-control" placeholder="Search by name or code" [(ngModel)]="searchQuery">
+        </div>
+        <div class="col-auto mr-4">
+            <button type="button" class="btn btn-outline-info" (click)="sumbitCountrySearch()">Search</button>
+        </div>
+        <div class="col-auto">
+            <select class="form-control" id="continentSelect" [(ngModel)]="selectedContinentId"
+                (change)="sumbitCountrySearch()">
+                <option [ngValue]="null">Select a continent to filter by</option>
+                <option *ngFor="let continent of continentList" [ngValue]="continent.continentId">
+                    {{ continent.name }}
+                </option>
+            </select>
         </div>
     </div>
     <div class="row">

@@ -11,8 +11,8 @@ import { ContinentService } from 'src/app/service/continent.service';
 })
 export class CountryComponent implements OnInit {
   continentList: ContinentItem[] = [];
-  selectedContinentId?: number;
-  query?: string;
+  selectedContinentId?: number | null = null;
+  searchQuery?: string;
   showCountryHeader: boolean = true;
 
   constructor(
@@ -30,9 +30,9 @@ export class CountryComponent implements OnInit {
     this.getContinentList();
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
-        if (val.url.indexOf('/country/list') == -1){
+        if (val.url.indexOf('/country/list') == -1) {
           this.showCountryHeader = false;
-        }else{
+        } else {
           this.showCountryHeader = true;
         }
       }
@@ -44,7 +44,7 @@ export class CountryComponent implements OnInit {
   sumbitCountrySearch(): void {
     var searchParams = {
       continentId: this.selectedContinentId,
-      query: this.query,
+      query: this.searchQuery,
     };
     this.router.navigate([], { queryParams: searchParams });
   }
